@@ -1,76 +1,39 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+
 using namespace std;
- 
 
-class Graph {
-    int V; 
- 
- 
-    list<int>* adj;
- 
-  
-    void DFSUtil(int v, bool visited[]);
- 
-public:
-    Graph(int V);
- 
-    void addEdge(int v, int w);
- 
-  
-    void DFS(int v);
-};
- 
-Graph::Graph(int V)
-{
-    this->V = V;
-    adj = new list<int>[V];
-}
- 
-void Graph::addEdge(int v, int w)
-{
-    adj[v].push_back(w); 
-}
- 
-void Graph::DFSUtil(int v, bool visited[])
-{
-   
-    visited[v] = true;
-    cout << v << " ";
- 
-   
-    list<int>::iterator i;
-    for (i = adj[v].begin(); i != adj[v].end(); ++i)
-        if (!visited[*i])
-            DFSUtil(*i, visited);
-}
- 
 
-void Graph::DFS(int v)
-{
-   
-    bool* visited = new bool[V];
-    for (int i = 0; i < V; i++)
-        visited[i] = false;
- 
- 
-    DFSUtil(v, visited);
-}
- 
+void dfs(int s, vector<int> g[],bool vis[]) {
+	vis[s]=true; //node has been traversed, hence initialised to be TRUE
+	cout<<s<<" ";// printing the traversed node
 
-int main()
-{
-  
-    Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
- 
-    cout << "Following is Depth First Traversal"
-            " (starting from vertex 2) \n";
-    g.DFS(2);
- 
-    return 0;
+	for(int i=0;i<g[s].size();i++) {  // now, traversing the untraversed neighbours of the node
+		if(vis[g[s][i]]==false) {
+			dfs(g[s][i],g,vis);
+		}
+	}
+}
+
+int main() {
+
+int n,e;
+
+cin>>n>>e;
+
+vector<int> g[n]; //array of vectors for storing the edges and connection details of the nodes
+
+bool vis[n]; // to check if the node has been visited during the traversal or not
+
+memset(vis,false,sizeof(vis)); // initialising all the elements of the boolean array to be false 
+
+for(int i=0;i<e;i++) {  // storing the given connections of nodes and edges in the array of vectors
+	int u,v;
+	cin>>u>>v;
+	g[u].push_back(v);
+	g[v].push_back(u);
+}
+
+dfs(0,g,vis);  ///DFS fucntion start here
+
+	return 0;
 }
