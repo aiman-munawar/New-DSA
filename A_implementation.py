@@ -1,21 +1,24 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+def method1(queue: list) -> list:
 
+    queue.append("a")
+    queue.append("b")
+    queue.append("c")
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
+    print("Initial queue")
+    print(queue)
+
+    print("\nElements dequeued from queue")
+    print(queue.pop(0))
+    print(queue.pop(0))
+    print(queue.pop(0))
+
+    print("\nQueue after removing elements")
+    return queue
 
 
 if __name__ == "__main__":
     """
     from timeit import timeit
-    Llist = LinkedList()
-    Llist.head = Node(1)
-    second = Node(2)
-    third = Node(3)
-    second.next = third
-    print(timeit(lambda: Llist, number=10000)) # 0.00037003099987487076
+
+    print(timeit(lambda: method1([]), number=10000)) # 0.8325513340023463
     """
