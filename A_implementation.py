@@ -1,24 +1,42 @@
-def method1(queue: list) -> list:
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
 
-    queue.append("a")
-    queue.append("b")
-    queue.append("c")
 
-    print("Initial queue")
-    print(queue)
+def insert(root, key):
+    if root is None:
+        return Node(key)
+    else:
+        if root.val == key:
+            return root
+        elif root.val < key:
+            root.right = insert(root.right, key)
+        else:
+            root.left = insert(root.left, key)
+    return root
 
-    print("\nElements dequeued from queue")
-    print(queue.pop(0))
-    print(queue.pop(0))
-    print(queue.pop(0))
 
-    print("\nQueue after removing elements")
-    return queue
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val)
+        inorder(root.right)
 
 
 if __name__ == "__main__":
     """
     from timeit import timeit
 
-    print(timeit(lambda: method1([]), number=10000)) # 0.8325513340023463
+    r = Node(50)
+    r = insert(r, 30)
+    r = insert(r, 20)
+    r = insert(r, 40)
+    r = insert(r, 70)
+    r = insert(r, 60)
+    r = insert(r, 80)
+
+    print(timeit(lambda: inorder(r), number=10000))  # 0.4426064440012851
     """
+
