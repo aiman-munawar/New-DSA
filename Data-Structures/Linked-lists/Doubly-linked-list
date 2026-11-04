@@ -12,7 +12,7 @@ class DoublyLinkedList:
         self.tail = None;    
             
     #addNode() will add a node to the list    
-    def addNode(self, data):    
+    def addNode(self, data):               
         #Create a new node    
         newNode = Node(data);    
             
